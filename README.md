@@ -40,6 +40,6 @@ Setup VPN IKEv2 [Road Warrior](https://en.wikipedia.org/wiki/Road_warrior_(compu
 I assume that you know how to use [Ansible](https://docs.ansible.com/ansible/latest/user_guide/intro_getting_started.html).
 
 - Rename `hosts.example` to `hosts`, replace `YOUR-HOST-HERE` with your Raspberry Pi. [More info here](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html).
-- In `host_vars`, rename the file name replacing `YOUR-HOST-HERE` with your Raspberry Pi. In that file, replace UPPERCASE variable with your data. You can find more variables to customize in [ansible-role-certbot](https://github.com/geerlingguy/ansible-role-certbot).
+- In `host_vars`, rename the file name replacing `YOUR-HOST-HERE` with your Raspberry Pi. In that file, replace UPPERCASE variables with your data. You can find more variables to customize in [ansible-role-certbot](https://github.com/geerlingguy/ansible-role-certbot).
 - `ansible-playbook -vv -i hosts vpn.yml` to start it.
 
