@@ -13,17 +13,22 @@ Setup VPN IKEv2 [Road Warrior](https://en.wikipedia.org/wiki/Road_warrior_(compu
 
 - [Ansible](https://www.ansible.com/) installed on your local machine.
 - A [Dynamic DNS](https://en.wikipedia.org/wiki/Dynamic_DNS) that points to your home. Only if your internet service provider assigns a dynamic IP to you.
-- Your firewall router should forward VPN ports to your Raspberry Pi
-  ```
-  UDP *:500 -> Raspberry Pi:500
-  UDP *:4500 -> Raspberry Pi:4500
-  ```
-  Your firewall router should allow incoming VPN packets from outside.
-  ```
-  From any host in wan, ESP protocol -> ALLOW
-  From any host in wan, AH protocol -> ALLOW
-  ```
-  [You can find more information about firewall here.](https://openwrt.org/docs/guide-user/services/vpn/ipsec/strongswan/roadwarrior)
+- Your firewall router:
+  - should forward VPN ports to your Raspberry Pi
+    ```
+    UDP *:500 -> Raspberry Pi:500
+    UDP *:4500 -> Raspberry Pi:4500
+    ```
+  - should forward port 80 (or 443) to allow Let's Encrypt to verify your domain ownership.
+    ```
+    TCP *:80 (or 443) -> Raspberry Pi:80 (or 443)
+    ```
+  - should allow incoming VPN packets from outside.
+    ```
+    From any host in wan, ESP protocol -> ALLOW
+    From any host in wan, AH protocol -> ALLOW
+    ```
+    [You can find more information about firewall here.](https://openwrt.org/docs/guide-user/services/vpn/ipsec/strongswan/roadwarrior)
 - A Raspberry Pi with Raspbian (Debian) Stretch.
 
 ## Dependencies
