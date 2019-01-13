@@ -1,8 +1,8 @@
-# VPN Raspberry Ansible Script
+# VPN Raspberry Pi Ansible Playbook
 
 Setup VPN IKEv2 [Road Warrior](https://en.wikipedia.org/wiki/Road_warrior_(computing)) with private/public key authentication for local side, username/password for Road Warrior client.
 
-## What does the script do?
+## What does the playbook do?
 
 - Create private/public keys using [Let's Encrypt](https://letsencrypt.org/) for your domain.
 - Automatic renewal of the keys.
@@ -36,5 +36,5 @@ I assume that you know how to use [Ansible](https://docs.ansible.com/ansible/lat
 
 - Rename `hosts.example` to `hosts`, replace `YOUR-HOST-HERE` with your Raspberry Pi. [More info here](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html).
 - In `host_vars`, rename the file name replacing `YOUR-HOST-HERE` with your Raspberry Pi. In that file, replace UPPERCASE variable with your data. You can find more variables to customize in [ansible-role-certbot](https://github.com/geerlingguy/ansible-role-certbot).
-- `ansible-playbook -vv -i hosts vpn.yml` to start Ansible script.
+- `ansible-playbook -vv -i hosts vpn.yml` to start it.
 
