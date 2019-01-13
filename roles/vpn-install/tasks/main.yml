@@ -1,0 +1,67 @@
+---
+- name: Install strongswan dependencies
+  apt: 
+    name:
+      - strongswan
+      - strongswan-swanctl
+      - libstrongswan-standard-plugins
+      - strongswan-ike
+      - strongswan-ikev2
+      - libstrongswan-extra-plugins
+      - libcharon-extra-plugins
+
+- name: Add Client Traffic Forwarding
+  sysctl:
+    name: "{{ item }}"
+    value: 1
+  with_items:
+    - net.ipv4.ip_forward
+    - net.ipv6.conf.all.forwarding
+
+- name: Add VPN configuration
+  template:
+    src: templates/swanctl.conf
+    dest: /etc/swanctl/swanctl.conf
+
+- name: Add strongswan.conf with correct plugins
+  copy:
+    src: files/strongswan.conf
+    dest: /etc/strongswan.conf
+
+- name: Create folders to store certificates
+  file:
+    path: /etc/swanctl/{{ item }}
+    state: directory
+    mode: 0755
+  with_items:
+    - x509
+    - x509ca
+    - private
+
+- name: Copy certificates from let's encrypt to strongswan
+  shell: |
+    cp /etc/letsencrypt/live/{{ domain }}/chain.pem /etc/swanctl/x509ca/
+    cp /etc/letsencrypt/live/{{ domain }}/privkey.pem /etc/swanctl/private/
+    cp /etc/letsencrypt/live/{{ domain }}/fullchain.pem /etc/swanctl/x509/
+
+- name: Add script to copy new certificate
+  template:
+    src: templates/renew-certs.sh
+    dest: /root/renew-certs.sh
+    mode: u=rwx,g=r,o=r
+
+- name: Add cronjob to copy new certs
+  cron:
+    name: Copy certs to strongswan
+    hour: "{{ certbot_auto_renew_hour }}"
+    minute: "{{ certbot_auto_renew_minute + 15 }}"
+    job: "/root/renew-certs.sh"
+
+- name: Add iptable rule permanently
+  lineinfile:
+    path: /etc/rc.local
+    line: iptables -t nat -A POSTROUTING  -o eth0 -j MASQUERADE
+    insertbefore: ^exit 0
+
+- name: Finished! Rebooting the system...
+  reboot:

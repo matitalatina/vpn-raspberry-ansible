@@ -1,0 +1,24 @@
+---
+ssh_user: pi
+domain: YOUR-DOMAIN-HERE
+# You can add more than one Road Warrior Client.
+vpn_users:
+  - username: CLIENT-WARRIOR-USERNAME
+    password: CLIENT-WARRIOR-PASSWORD
+# Change it if you want to restrict the local hosts the Road Warrior Client should see.
+vpn_local_ts: "0.0.0.0/0"
+
+# ansible-role-certbot variables
+# More info here https://github.com/geerlingguy/ansible-role-certbot
+certbot_auto_renew: true
+certbot_create_if_missing: true
+certbot_create_method: standalone
+certbot_auto_renew_user: root
+certbot_auto_renew_hour: 3
+certbot_auto_renew_minute: 30
+certbot_auto_renew_options: "--quiet --no-self-upgrade"
+certbot_create_standalone_stop_services: []
+certbot_certs:
+  - email: YOUR-EMAIL-HERE
+    domains:
+      - "{{domain}}"
