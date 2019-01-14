@@ -1,3 +1,5 @@
 hosts
-/group_vars/vpns.yml
-/host_vars/rpi-mattia.yml
+vpn.retry
+/group_vars/*.yml
+/host_vars/*.yml
+!/host_vars/YOUR-HOST-HERE.yml
