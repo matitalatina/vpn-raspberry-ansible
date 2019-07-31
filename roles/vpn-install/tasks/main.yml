@@ -5,8 +5,6 @@
       - strongswan
       - strongswan-swanctl
       - libstrongswan-standard-plugins
-      - strongswan-ike
-      - strongswan-ikev2
       - libstrongswan-extra-plugins
       - libcharon-extra-plugins
 
