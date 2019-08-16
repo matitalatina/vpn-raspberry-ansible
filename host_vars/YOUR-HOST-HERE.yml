@@ -1,5 +1,5 @@
 ---
-ssh_user: pi
+ansible_user: pi
 domain: YOUR-DOMAIN-HERE
 # You can add more than one Road Warrior Client.
 vpn_users:

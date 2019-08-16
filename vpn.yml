@@ -1,7 +1,6 @@
 ---
 - name: Deploy IKEv2 Road Warrior VPN
   hosts: vpns
-  remote_user: "{{ssh_user}}"
 
   roles:
     - role: geerlingguy.certbot
