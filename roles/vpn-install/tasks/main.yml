@@ -18,7 +18,7 @@
 
 - name: Add VPN configuration
   template:
-    src: templates/swanctl.conf
+    src: templates/swanctl.conf.j2
     dest: /etc/swanctl/swanctl.conf
 
 - name: Add strongswan.conf with correct plugins
@@ -44,7 +44,7 @@
 
 - name: Add script to copy new certificate
   template:
-    src: templates/renew-certs.sh
+    src: templates/renew-certs.sh.j2
     dest: /root/renew-certs.sh
     mode: u=rwx,g=r,o=r
 
