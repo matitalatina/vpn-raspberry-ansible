@@ -2,13 +2,9 @@
 connections {
     ikev2-eap {
         version = 2
-        proposals = aes192gcm16-aes128gcm16-prfsha256-ecp256-ecp521,aes192-sha256-modp3072,default
-        rekey_time = 0s
         pools = primary-pool-ipv4
-        fragmentation = yes
         dpd_delay = 30s
         send_cert = always
-        # dpd_timeout doesn't do anything for IKEv2. The general IKEv2 packet timeouts are used.
         local-1 {
             auth = pubkey
             certs = fullchain.pem
@@ -21,10 +17,7 @@ connections {
         }
         children {
             ikev2-eap {
-                local_ts = {{ vpn_local_ts }},
-                rekey_time = 0s
-                dpd_action = clear
-                esp_proposals = aes192gcm16-aes128gcm16-prfsha256-ecp256-modp3072,aes192-sha256-ecp256-modp3072,default
+                local_ts = {{ vpn_local_ts }}
             }
         }
     }
@@ -40,9 +33,9 @@ pools {
 
 secrets {
   {% for user in vpn_users %}
-   eap-{{ user.username }} {
-      id = {{ user.username }}
-      secret = "{{ user.password }}"
-   }
+    eap-{{ user.username }} {
+        id = {{ user.username }}
+        secret = "{{ user.password }}"
+    }
   {% endfor %}
 }
