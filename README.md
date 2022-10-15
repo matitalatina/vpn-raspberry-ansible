@@ -43,3 +43,11 @@ I assume that you know how to use [Ansible](https://docs.ansible.com/ansible/lat
 - In `host_vars`, rename the file name replacing `YOUR-HOST-HERE` with your Raspberry Pi. In that file, replace UPPERCASE variables with your data. You can find more variables to customize in [ansible-role-certbot](https://github.com/geerlingguy/ansible-role-certbot).
 - `ansible-playbook -vv -i hosts vpn.yml` to start it.
 
+## Support my work
+
+Everything I made is open source.
+If you like what I'm doing and you want to support me, you can help me 😄!
+
+- Sponsor me with [Github](https://github.com/sponsors/matitalatina)
+- [Buy me a coffee](https://www.buymeacoffee.com/mattianatali)
+- [Paypal](https://paypal.me/mattianatali)
